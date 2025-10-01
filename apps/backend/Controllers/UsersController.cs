@@ -11,14 +11,13 @@ namespace BackendAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly BlobStorageService _blobService;
+private readonly IServiceProvider _services;
 
-        public UsersController(ApplicationDbContext dbContext, BlobStorageService blobService)
-        {
-            _dbContext = dbContext;
-            _blobService = blobService;
-        }
-
+public UsersController(ApplicationDbContext dbContext, IServiceProvider services)
+{
+    _dbContext = dbContext;
+    _services  = services;
+}
         [HttpPost("register")]  // -> POST /api/users/register
         public async Task<IActionResult> Register(
             [FromForm] string username,
@@ -37,16 +36,19 @@ namespace BackendAPI.Controllers
             };
 
             if (image is { Length: > 0 })
-            {
-                var safeFileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
-                await using var stream = image.OpenReadStream();
-                var contentType = string.IsNullOrWhiteSpace(image.ContentType)
-                    ? "application/octet-stream"
-                    : image.ContentType;
+{
+    // Construct only when really needed
+    var blobService = _services.GetRequiredService<BlobStorageService>();
 
-                var imageUrl = await _blobService.UploadFileAsync(stream, safeFileName, contentType);
-                user.ImageUrl = imageUrl;
-            }
+    var safeFileName = $"{Guid.NewGuid()}_{Path.GetFileName(image.FileName)}";
+    await using var stream = image.OpenReadStream();
+    var contentType = string.IsNullOrWhiteSpace(image.ContentType)
+        ? "application/octet-stream"
+        : image.ContentType;
+
+    var imageUrl = await blobService.UploadFileAsync(stream, safeFileName, contentType);
+    user.ImageUrl = imageUrl;
+}
 
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();

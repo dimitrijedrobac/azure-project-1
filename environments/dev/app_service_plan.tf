@@ -11,7 +11,7 @@ locals {
 # Shared App Service Plan (Linux)
 
 module "app-service-plan" {
-  source                 = "../../modules/app_service_plan"
+  source                 = "../../infra/modules/app_service_plan"
   resource_group_name    = "rg-learn-Dimitrije-Drobac"
   location               = "West Europe"
   app_service_plan_name  = "dd-app-service-plan"
@@ -25,7 +25,7 @@ module "app-service-plan" {
 # Backend Web App (.NET 8)
 
 module "web_app_backend" {
-  source                = "../../modules/web_app_backend"
+  source                = "../../infra/modules/web_app_backend"
   resource_group_name   = "rg-learn-Dimitrije-Drobac"
   location              = "West Europe"
   service_plan_id       = module.app-service-plan.id
@@ -45,7 +45,7 @@ module "web_app_backend" {
 # Frontend Web App (Docker Hub image)
 
 module "web_app_frontend" {
-  source                = "../../modules/web_app_frontend"
+  source                = "../../infra/modules/web_app_frontend"
   resource_group_name   = "rg-learn-Dimitrije-Drobac"
   location              = "West Europe"
   service_plan_id       = module.app-service-plan.id
