@@ -1,0 +1,93 @@
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+
+# ---- Editors/IDE ----
+.vscode/
+.idea/
+*.code-workspace
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+pytest_cache/
+.coverage
+htmlcov/
+
+# ---- Node / JS ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# lockfiles are usually committed; don’t ignore them:
+#!package-lock.json
+#!yarn.lock
+#!pnpm-lock.yaml
+
+# ---- Terraform ----
+.terraform/
+.terraform.tfstate.lock.info
+
+# State files (keep OUT of git)
+terraform.tfstate
+terraform.tfstate.*
+*.tfstate
+*.tfstate.*
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Plans (binary)
+*.tfplan
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# If you keep example/non-secret templates, unignore them:
+!*.example.tfvars
+!*.example.tfvars.json
+
+# Local overrides (not for CI)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Provider plugin cache
+.terraform.lock.hcl
+# ^ If you prefer to commit the lock file for reproducible builds,
+#   comment the line above to INCLUDE it in version control.
+
+# ---- Env / Secrets ----
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+
+# ---- Logs ----
+*.log
+logs/
+tmp/
+temp/
+
+# ---- Build artifacts ----
+dist/
+build/
+out/
+coverage/
+
+# ---- Docker (keep Dockerfile; ignore local clutter) ----
+docker-data/
