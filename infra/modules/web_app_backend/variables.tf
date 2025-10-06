@@ -32,3 +32,8 @@ variable "frontend_hostname" {
 }
 variable "app_name" { type = string }
 
+variable "kv_vault_uri" {
+  description = "The URI of the Key Vault."
+  type        = string
+}
+

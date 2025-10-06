@@ -29,6 +29,7 @@ module "web_app_backend" {
   resource_group_name   = "rg-learn-Dimitrije-Drobac"
   location              = "West Europe"
   service_plan_id       = module.app-service-plan.id
+  kv_vault_uri         = module.key_vault.kv-kv_vault_uri
 
 
   app_name              = local.backend_name

@@ -26,5 +26,8 @@ resource "azurerm_linux_web_app" "backend" {
     "ASPNETCORE_ENVIRONMENT"      = "Production"
     "ConnectionStrings__DefaultConnection" = var.sql_connection_string
     "BlobStorage__AccountName"             = var.storage_account_name
-    ALLOWED_ORIGIN         = "https://dd-frontend-webapp.azurewebsites.net"  }
+    ALLOWED_ORIGIN         = "https://dd-frontend-webapp.azurewebsites.net"  
+      "DbUsername" = "@Microsoft.KeyVault(SecretUri=${var.kv_vault_uri}secrets/DbUsername/)"
+  "DbPassword" = "@Microsoft.KeyVault(SecretUri=${var.kv_vault_uri}secrets/DbPassword/)"
+  }
 }
